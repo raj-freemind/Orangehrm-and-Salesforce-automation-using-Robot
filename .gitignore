@@ -1,0 +1,7 @@
+robot/
+log.html
+output.xml
+report.html
+*screenshot*
+results/
+__pycache__/
