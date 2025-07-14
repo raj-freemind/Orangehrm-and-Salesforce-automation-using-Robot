@@ -2,7 +2,6 @@
 Resource    hrm_locators.robot
 Resource    ../../variables/orangehrm.robot
 Resource    ../../variables/common.robot
-Resource    ../common/common_keywords.robot
 Library     SeleniumLibrary
 Library     Collections
 Library     BuiltIn
