@@ -64,7 +64,7 @@ robot -d results tests/orangehrm/api/req_res_tests.robot
 ### Salesforce UI Tests
 
 ```bash
-robot -d results/salesforce tests/salesforce/ui/salesforce_test.robot
+robot -d results/salesforce tests/salesforce/salesforce_test.robot
 ```
 
 ---
