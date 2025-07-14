@@ -106,8 +106,7 @@ orangehrm-salesforce-automation/
 │   │   └── api/
 │   │       └── req_res_tests.robot
 │   └── salesforce/
-│       └── ui/
-│           └── salesforce_test.robot
+│       └── salesforce_test.robot
 │
 ├── resources/
 │   ├── orangehrm/
@@ -115,8 +114,6 @@ orangehrm-salesforce-automation/
 │
 ├── variables/
 ├── results/
-├── reports/
-├── screenshots/
 ├── requirements.txt
 └── README.md
 ```
