@@ -1,7 +1,8 @@
-robot/
+robotenv/
 log.html
 output.xml
 report.html
 *screenshot*
 results/
+*console_output*
 __pycache__/
