@@ -25,3 +25,5 @@ ${ACCOUNT_LIST_NAME}        xpath=//th[@data-label='Account Name']//a
 ${EDIT_BUTTON}        xpath=//span[contains(text(), 'Edit Account Name')]/ancestor::button
 ${EDIT_TEXT_INPUT}        xpath=//input[starts-with(@id, 'input') and @name='Name']
 ${FINAL_SAVE_BUTTON}        xpath=//button[contains(text(), 'Save')]
+
+${TOAST_LOADER}        xpaht=//div[starts-with(@id, 'toastDescription')]

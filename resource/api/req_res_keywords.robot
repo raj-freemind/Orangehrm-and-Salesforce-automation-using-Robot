@@ -2,7 +2,6 @@
 Library    RequestsLibrary
 Library    Collections
 Library    JSONLibrary
-Library    ../../libraries/custom_helpers.py
 Resource    ../../variables/common.robot
 
 

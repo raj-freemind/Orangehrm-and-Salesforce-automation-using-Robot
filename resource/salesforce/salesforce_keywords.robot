@@ -31,9 +31,14 @@ Navigate To Tab Menu
     Execute Javascript
     ...    var el = document.evaluate("//span[contains(text(), '${label}')]/ancestor::a", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     ...    if (el) { el.scrollIntoView({behavior: 'smooth'}); el.click(); }
-    Wait Until Page Contains Element    xpath=//span[text()='Account Name']
+    Wait Until Page Contains Element    xpath=//span[text()='Account Name']    10s
+    Sleep    3s
     Element Should Be Visible    ${ACCOUNT_PAGE_LOAD}
     Capture Page Screenshot    ${SCREENSHOT_DIR}/Navigate_To_Account_page.png
+Toast Should Be Gone
+    ${toast}=    Execute Javascript
+    ...    return document.evaluate("//div[starts-with(@id, 'toastDescription')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    Should Be Equal    ${toast}    ${None}
 
 Create New Account
     [Arguments]    ${account_name_input}
@@ -49,13 +54,12 @@ Create New Account
     Input Text    ${ACCOUNT_NAME}    ${account_name_input}
     Wait Until Element Is Enabled    ${SAVE_BUTTON}
     Click Element    ${SAVE_BUTTON}
-
+    Wait Until Keyword Succeeds    10s    1s    Toast Should Be Gone
     # Build dynamic XPath for verification
     Set Test Variable    ${ACCOUNT_NAME_SAVED}    xpath=//lightning-formatted-text[@slot='primaryField' and normalize-space(text())='${account_name_input}']
 
     Wait Until Element Is Visible    ${ACCOUNT_NAME_SAVED}
     Element Text Should Be    ${ACCOUNT_NAME_SAVED}    ${account_name_input}
-
     Log    Account created with name: ${account_name_input}
     Capture Page Screenshot    ${SCREENSHOT_DIR}/account_created.png
 
@@ -105,6 +109,8 @@ Edit Account Name
 
     Wait Until Element Is Visible    ${FINAL_SAVE_BUTTON}
     Click Element    ${FINAL_SAVE_BUTTON}
+
+    Wait Until Keyword Succeeds    10s    1s    Toast Should Be Gone
 
     Wait Until Element Is Not Visible    ${FINAL_SAVE_BUTTON}    timeout=10s
 

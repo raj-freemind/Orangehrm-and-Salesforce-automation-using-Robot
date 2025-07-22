@@ -35,3 +35,5 @@ ${EDIT_SAVE_BUTTON}    xpath =//p[normalize-space()='* Required']/following-sibl
 ${DELETE_BUTTON}    xpath=//div[@class='oxd-table-card'][1]//button[2]
 ${CONFIRM_DELETE}    xpath=//button[contains(@class,'oxd-button--label-danger')]
                        # //button[contains(., 'Yes, Delete')]
+
+${LOADER}    xpath=//div[contains(@class, 'oxd-loading-spinner')]

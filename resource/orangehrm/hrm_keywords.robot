@@ -44,6 +44,7 @@ Navigate to Add Employee
     Click Element    ${PIM_MENU}
     Wait Until Element Is Visible    ${ADD_EMPLOYEE_MENU}
     Click Element    ${ADD_EMPLOYEE_MENU}
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
     Wait Until Page Contains    Add Employee
     #Assertion
     Run Keyword And Continue On Failure
@@ -62,8 +63,9 @@ Add New Employee
     Input Text    ${EMPLOYEE_ID_INPUT}   ${employee_id}
     Wait Until Element Is Visible    ${SAVE_BUTTON}
     Click Button    ${SAVE_BUTTON}
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
     #assertion
-    Wait Until Page Contains    Personal Details
+    Wait Until Page Contains    Personal Details    10s
     Wait Until Element Is Visible    ${PERSONAL_DETAILS_PAGE}
     Run Keyword And Continue On Failure
     ...    Element Should Be Visible    ${PERSONAL_DETAILS_PAGE}
@@ -75,12 +77,14 @@ Add New Employee
 Navigate to Employee list
     Log    Navigating to Employee List page
     Click Element    ${EMPLOYEE_LIST}
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
     Wait Until Page Contains    Employee Information
     Wait Until Element Is Visible    ${EMPLOYEE_LIST_DATA}
     Run Keyword And Continue On Failure
     ...    Element Should Be Visible    ${EMPLOYEE_LIST_DATA}
     Run Keyword And Continue On Failure
     ...    Element Text Should Be    ${EMPLOYEE_LIST_DATA}    Employee Information
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
     Log    Employee List page opened
     Capture Page Screenshot    ${SCREENSHOT_DIR}/navigate_to_list.png
 
@@ -89,11 +93,12 @@ Search Employee
     Log    Searching for employee: ${employee_name}
     Wait Until Element Is Visible    ${RESET_BUTTON}
     Click Button    ${RESET_BUTTON}
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
     Wait Until Element Is Visible    ${SEARCH_NAME_INPUT}
     Input Text    ${SEARCH_NAME_INPUT}    ${employee_name}
     Wait Until Element Is Visible    ${SEARCH_BUTTON}
     Click Button    ${SEARCH_BUTTON}
-
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
     ${employee_found}=    Run Keyword And Return Status    Wait Until Element Is Visible    ${EMPLOYEE_LIST_ROW}    timeout=5s
     Run Keyword If    '${employee_found}' == 'True'    Log    Employee found in list
     Run Keyword If    '${employee_found}' == 'False'   Log    Employee not found in list
@@ -101,6 +106,8 @@ Search Employee
 
 Verify Employee In List
     [Arguments]    ${expected_name}
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
+    Wait Until Element Is Visible    ${EMPLOYEE_LIST_NAME}    15s
     ${actual_name}=    Get Text    ${EMPLOYEE_LIST_NAME}
     Log    Verifying employee presence: Expected = ${expected_name}, Found = ${actual_name}
     Run Keyword And Continue On Failure    Should Contain    ${actual_name}    ${expected_name}
@@ -111,11 +118,20 @@ Edit Employee Middle Name
     [Arguments]    ${new_middle_name}
     Log    Editing employee middle name to: ${new_middle_name}
     Click Button    ${EDIT_BUTTON}
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
+    Sleep    5
     Wait Until Element Is Visible    ${MIDDLE_NAME_INPUT}
-    Clear Element Text    ${MIDDLE_NAME_INPUT}
+    # Clear Element Text    ${MIDDLE_NAME_INPUT}
     Input Text    ${MIDDLE_NAME_INPUT}    _edited
+    
+    Wait Until Element Is Visible    ${EDIT_SAVE_BUTTON}
+
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
     Click Button    ${EDIT_SAVE_BUTTON}
-    Wait Until Element Is Visible    ${PERSONAL_DETAILS_PAGE}
+    
+    Wait Until Element Is Not Visible    ${LOADER}    timeout=15s
+    Wait Until Element Is Visible    ${PERSONAL_DETAILS_PAGE}    10s
+
     Run Keyword And Continue On Failure
     ...    Element Should Be Visible    ${PERSONAL_DETAILS_PAGE}
     Run Keyword And Continue On Failure
@@ -123,6 +139,7 @@ Edit Employee Middle Name
     Wait Until Page Contains    Employee Full Name
     Log    Employee middle name edited successfully
     Capture Page Screenshot    ${SCREENSHOT_DIR}/edited_middle_name.png
+
 
 Delete Employee
     [Arguments]    ${employee_name}
